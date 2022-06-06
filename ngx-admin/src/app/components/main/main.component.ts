@@ -1,35 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
+import {TableElement} from "../../models/table.model";
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079},
+export const TABLE_DATA: TableElement[] = [
+  {title: '', color: '', attachments: 1.0079},
 ];
-
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
+
 export class MainComponent implements OnInit {
 
   ngOnInit() {}
 
   displayedColumns: string[] = ['title', 'color', 'attachments'];
-  dataToDisplay = [...ELEMENT_DATA];
+  dataToDisplay = [...TABLE_DATA];
 
   dataSource = new ExampleDataSource(this.dataToDisplay);
 
   addData() {
     const randomElementIndex = 1;
-    this.dataToDisplay = [...this.dataToDisplay, ELEMENT_DATA[randomElementIndex]];
+    this.dataToDisplay = [...this.dataToDisplay, TABLE_DATA[randomElementIndex]];
     this.dataSource.setData(this.dataToDisplay);
   }
 
@@ -37,27 +32,28 @@ export class MainComponent implements OnInit {
     this.dataToDisplay = this.dataToDisplay.slice(0, -1);
     this.dataSource.setData(this.dataToDisplay);
   }
+
   editData() {
     this.dataToDisplay = this.dataToDisplay.slice(0, -1);
     this.dataSource.setData(this.dataToDisplay);
   }
 }
 
-class ExampleDataSource extends DataSource<PeriodicElement> {
-  private _dataStream = new ReplaySubject<PeriodicElement[]>();
+class ExampleDataSource extends DataSource<TableElement> {
+  private _dataStream = new ReplaySubject<TableElement[]>();
 
-  constructor(initialData: PeriodicElement[]) {
+  constructor(initialData: TableElement[]) {
     super();
     this.setData(initialData);
   }
 
-  connect(): Observable<PeriodicElement[]> {
+  connect(): Observable<TableElement[]> {
     return this._dataStream;
   }
 
   disconnect() {}
 
-  setData(data: PeriodicElement[]) {
+  setData(data: TableElement[]) {
     this._dataStream.next(data);
   }
 
