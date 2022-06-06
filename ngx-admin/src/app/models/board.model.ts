@@ -5,7 +5,6 @@ export interface BoardData {
 
 export interface BoardModel extends BoardData {
   id: string;
-  participants?: Participant[];
   columns: BoardColumn[];
 }
 
@@ -35,12 +34,8 @@ export interface CreateTask {
   userId: string;
 }
 
-export interface Participant {
-  name: string;
-  email: string;
-}
-
 export interface DialogData {
-  animal: string;
-  name: string;
+  title: string;
+  color: string;
+  attachments: any;
 }

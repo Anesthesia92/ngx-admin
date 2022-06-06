@@ -1,6 +1,7 @@
-import {Component, Inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogData} from "../boards/boards.component";
+import {DialogData} from "../../models/board.model";
+
 
 @Component({
   selector: 'app-dialog-overview',
@@ -21,5 +22,8 @@ export class DialogOverviewComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  editData($event: any) {
+
+  }
 }
 

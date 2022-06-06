@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
-import {TableElement} from "../../models/table.model";
-
-export const TABLE_DATA: TableElement[] = [
-  {title: '', color: '', attachments: 1.0079},
-];
+import {DialogData} from "../../models/board.model";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-main',
@@ -13,20 +10,17 @@ export const TABLE_DATA: TableElement[] = [
   styleUrls: ['./main.component.scss']
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent {
 
-  ngOnInit() {}
+  public dataArr: DialogData [] = [];
+  @Input() public title: string | undefined;
+  @Input() public color: string | undefined;
+  @Input() public attachments: any;
+  @Output()  displayedColumns: string[] = ['title', 'color', 'attachments'];
+  @Output() dataToDisplay = [...this.dataArr];
+  @Output() dataSource = new ExampleDataSource(this.dataToDisplay);
 
-  displayedColumns: string[] = ['title', 'color', 'attachments'];
-  dataToDisplay = [...TABLE_DATA];
-
-  dataSource = new ExampleDataSource(this.dataToDisplay);
-
-  addData() {
-    const randomElementIndex = 1;
-    this.dataToDisplay = [...this.dataToDisplay, TABLE_DATA[randomElementIndex]];
-    this.dataSource.setData(this.dataToDisplay);
-  }
+  constructor(public dialog: MatDialog) {}
 
   removeData() {
     this.dataToDisplay = this.dataToDisplay.slice(0, -1);
@@ -34,28 +28,31 @@ export class MainComponent implements OnInit {
   }
 
   editData() {
-    this.dataToDisplay = this.dataToDisplay.slice(0, -1);
+    const elementIndex = 1;
+    this.dataToDisplay = [...this.dataToDisplay, (this.dataArr)[elementIndex]];
     this.dataSource.setData(this.dataToDisplay);
   }
 }
 
-class ExampleDataSource extends DataSource<TableElement> {
-  private _dataStream = new ReplaySubject<TableElement[]>();
+class ExampleDataSource extends DataSource<DialogData>  {
+  private _dataStream = new ReplaySubject<DialogData []>();
 
-  constructor(initialData: TableElement[]) {
+  constructor(initialData: DialogData[]) {
     super();
     this.setData(initialData);
   }
 
-  connect(): Observable<TableElement[]> {
+  connect(): Observable<DialogData[]> {
     return this._dataStream;
   }
 
   disconnect() {}
 
-  setData(data: TableElement[]) {
+  setData(data: DialogData[]) {
     this._dataStream.next(data);
   }
+
+
 
 
 }

@@ -1,32 +1,35 @@
 <div class="demo-button-container">
-  <button mat-raised-button (click)="addData()" class="demo-button">
-    Add data
+  <button mat-raised-button (click)="editData()"  class="demo-button">
+    Edit
   </button>
   <button
     mat-raised-button
     [disabled]="!dataToDisplay.length"
     (click)="removeData()"
     class="demo-button">
-    Remove data
+    Remove
   </button>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef>Title</th>
-    <td mat-cell *matCellDef="let element">{{element.title}}</td>
+    <th mat-header-cell *matHeaderCellDef >Title</th>
+    <td mat-cell [title]="title">{{title}}</td>
   </ng-container>
 
   <ng-container matColumnDef="color">
     <th mat-header-cell *matHeaderCellDef>Color</th>
-    <td mat-cell *matCellDef="let element">{{element.color}}</td>
+    <td mat-cell *ngIf="color">{{color}}</td>
   </ng-container>
 
   <ng-container matColumnDef="attachments">
     <th mat-header-cell *matHeaderCellDef>Attachments</th>
-    <td mat-cell *matCellDef="let element">{{element.attachments}}</td>
+    <td mat-cell *ngIf="attachments">{{attachments}}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<li *ngIf="title">
+  You chose: <i>{{title}}</i>
+</li>

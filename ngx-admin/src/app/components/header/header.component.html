@@ -1,13 +1,8 @@
 <mat-toolbar>
   <div class="toolbar-container">
-    <mat-form-field appearance="fill">
-      <mat-label>What's your name?</mat-label>
-      <input matInput [(ngModel)]="name">
-    </mat-form-field>
-
-    <button mat-raised-button color="accent" (click)="openDialog()">Create board</button>
+    <button mat-raised-button color="accent" (click)="openDialog()" >Create board</button>
   </div>
-  <li *ngIf="animal">
-    You chose: <i>{{animal}}</i>
+  <li *ngIf="title">
+    You chose: <i>{{title}}</i>
   </li>
 </mat-toolbar>
