@@ -3,6 +3,7 @@
   <app-ck-editor [(ngModel)]="data.title"></app-ck-editor>
     <mat-label>Color</mat-label>
     <input matInput [(ngModel)]="data.color">
+  <mat-label>Attachments</mat-label>
     <input type="file" onchange="console.log(event.target.files)" [(ngModel)]="data.attachments">
 </div>
 <div mat-dialog-actions>
