@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogData} from "../../models/board.model";
-import {MatBottomSheet} from "@angular/material/bottom-sheet";
-import {UploadFilesComponent} from "../upload-files/upload-files.component";
 
 @Component({
   selector: 'app-dialog-overview',

@@ -19,7 +19,6 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {CkEditorComponent} from "./components/ck-editor/ck-editor.component";
-import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 import {MatLineModule} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
 
@@ -31,7 +30,6 @@ import {MatListModule} from "@angular/material/list";
     BoardsComponent,
     DialogOverviewComponent,
     CkEditorComponent,
-    UploadFilesComponent
   ],
   imports: [
     BrowserModule,

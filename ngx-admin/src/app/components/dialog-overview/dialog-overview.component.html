@@ -1,15 +1,9 @@
 <div mat-dialog-content>
   <mat-label>Title</mat-label>
   <app-ck-editor [(ngModel)]="data.title"></app-ck-editor>
-  <mat-form-field appearance="fill">
     <mat-label>Color</mat-label>
     <input matInput [(ngModel)]="data.color">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Attachments</mat-label>
-    <input matInput [(ngModel)]="data.attachments">
-  </mat-form-field>
-  <app-upload-files> </app-upload-files>
+    <input type="file" onchange="console.log(event.target.files)" [(ngModel)]="data.attachments">
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
