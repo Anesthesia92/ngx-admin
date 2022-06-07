@@ -16,7 +16,7 @@ export class MainComponent {
   @Input() public title: string | undefined;
   @Input() public color: string | undefined;
   @Input() public attachments: any;
-  @Output()  displayedColumns: string[] = ['title', 'color', 'attachments'];
+  @Output() displayedColumns: string[] = ['title', 'color', 'attachments'];
   @Output() dataToDisplay = [...this.dataArr];
   @Output() dataSource = new ExampleDataSource(this.dataToDisplay);
 

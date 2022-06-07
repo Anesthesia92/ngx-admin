@@ -1,8 +1,6 @@
 <div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="data.title">
-  </mat-form-field>
+  <mat-label>Title</mat-label>
+  <app-ck-editor [(ngModel)]="data.title"></app-ck-editor>
   <mat-form-field appearance="fill">
     <mat-label>Color</mat-label>
     <input matInput [(ngModel)]="data.color">
@@ -11,8 +9,9 @@
     <mat-label>Attachments</mat-label>
     <input matInput [(ngModel)]="data.attachments">
   </mat-form-field>
+  <app-upload-files> </app-upload-files>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.title" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="[data.title, data.color, data.attachments]" cdkFocusInitial>Ok</button>
 </div>
