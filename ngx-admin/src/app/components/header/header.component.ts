@@ -23,7 +23,7 @@ export class HeaderComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
-      width: '1000px',
+      width: '700px',
       data: {title: this.title, color: this.color, attachments: this.attachments},
     });
 

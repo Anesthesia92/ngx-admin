@@ -21,6 +21,7 @@ import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {CkEditorComponent} from "./components/ck-editor/ck-editor.component";
 import {MatLineModule} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
+import { ColorSketchModule } from 'ngx-color/sketch';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MatListModule} from "@angular/material/list";
     CKEditorModule,
     MatLineModule,
     MatListModule,
+    ColorSketchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

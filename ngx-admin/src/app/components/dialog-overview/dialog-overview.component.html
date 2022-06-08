@@ -1,10 +1,16 @@
 <div mat-dialog-content>
+  <mat-toolbar>
   <mat-label>Title</mat-label>
-  <app-ck-editor [(ngModel)]="data.title"></app-ck-editor>
+  <app-ck-editor [(ngModel)]="data.title" class="text-editor"></app-ck-editor>
+  </mat-toolbar>
+  <mat-toolbar>
     <mat-label>Color</mat-label>
-    <input matInput [(ngModel)]="data.color">
+    <color-sketch (onChange)="handleChange($event)" [(ngModel)]="data.color" class="color-picker"></color-sketch>
+    </mat-toolbar>
+  <mat-toolbar>
   <mat-label>Attachments</mat-label>
-    <input type="file" onchange="console.log(event.target.files)" [(ngModel)]="data.attachments">
+    <input type="file" onchange="console.log(event.target.files)" [(ngModel)]="data.attachments" class="attachments">
+  </mat-toolbar>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>

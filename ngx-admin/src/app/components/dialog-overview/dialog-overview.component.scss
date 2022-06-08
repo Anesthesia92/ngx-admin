@@ -1,3 +1,21 @@
-.mat-form-field {
-  width: 700px;
+mat-dialog-content {
+  height: 600px;
+}
+
+mat-toolbar {
+  width: 615px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 5px;
+}
+
+.text-editor {
+  width: 550px;
+}
+
+.color-picker {
+  width: 310px;
+  height: 410px;
 }

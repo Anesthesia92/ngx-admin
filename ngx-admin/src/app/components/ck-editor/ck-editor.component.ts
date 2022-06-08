@@ -7,6 +7,7 @@ import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
   templateUrl: './ck-editor.component.html',
   styleUrls: ['./ck-editor.component.scss']
 })
+
 export class CkEditorComponent {
 
   public Editor = ClassicEditor;

@@ -2,6 +2,7 @@
   "dependencies": {
     "@ngrx/effects": "^13.2.0",
     "@ngrx/store": "^13.2.0",
-    "@ngrx/store-devtools": "^13.2.0"
+    "@ngrx/store-devtools": "^13.2.0",
+    "angular-bootstrap-colorpicker": "^3.0.32"
   }
 }
