@@ -1,14 +1,12 @@
 import {Component, Input, Output, ViewChild} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
-import {DialogData} from "../../models/board.model";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {TableElement} from "../../models/table.model";
 import {MatTable} from "@angular/material/table";
+import {TableElement} from "../../models/board.model";
 
 const ELEMENT_DATA: TableElement [] = [
-  {title: 'Hydrogen', color: 1.0079, attachments: 'H',
-  }
+  {title: 'Hydrogen', color: 1.0079, attachments: 'H', id: ''}
 ]
 
 @Component({
@@ -26,7 +24,7 @@ export class MainComponent {
   @Input() public attachments: any;
   @ViewChild(MatTable) table!: MatTable<TableElement>;
 
-  displayedColumns: string[] = ['title', 'color', 'attachments'];
+  displayedColumns: string[] = ['title', 'color', 'attachments', 'buttons'];
 
   dataSource = [...ELEMENT_DATA];
 

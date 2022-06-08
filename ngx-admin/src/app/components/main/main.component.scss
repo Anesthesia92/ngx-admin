@@ -2,3 +2,11 @@
   max-width: 1024px;
   margin: 0 auto;
 }
+
+.demo-table {
+  width: 100%;
+  .column {
+    width: 25%;
+  }
+}
+

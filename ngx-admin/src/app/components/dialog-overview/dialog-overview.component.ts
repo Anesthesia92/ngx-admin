@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogData} from "../../models/board.model";
+
 import {ColorEvent} from "ngx-color";
+import {DialogData} from "../../models/dialog.model";
 
 @Component({
   selector: 'app-dialog-overview',
