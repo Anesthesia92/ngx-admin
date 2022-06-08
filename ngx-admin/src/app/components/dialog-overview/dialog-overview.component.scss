@@ -3,7 +3,6 @@ mat-dialog-content {
 }
 
 mat-toolbar {
-  width: 615px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -18,4 +17,5 @@ mat-toolbar {
 .color-picker {
   width: 310px;
   height: 410px;
+  cursor: pointer;
 }

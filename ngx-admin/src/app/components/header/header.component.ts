@@ -1,12 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { BoardsService } from 'src/app/services/boards.service';
-import { ApiService } from '../../services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import {DialogOverviewComponent} from "../dialog-overview/dialog-overview.component";
 import {MatBottomSheet, MatBottomSheetRef} from "@angular/material/bottom-sheet";
+import {ColorEvent} from "ngx-color";
 
 @Component({
   selector: 'app-header',
@@ -39,4 +38,5 @@ export class HeaderComponent {
       this.attachments = attachments;
     });
   }
+
 }

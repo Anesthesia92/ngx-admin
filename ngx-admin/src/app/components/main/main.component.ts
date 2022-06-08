@@ -1,8 +1,15 @@
-import {Component, Input,  Output} from '@angular/core';
+import {Component, Input, Output, ViewChild} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
 import {DialogData} from "../../models/board.model";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {TableElement} from "../../models/table.model";
+import {MatTable} from "@angular/material/table";
+
+const ELEMENT_DATA: TableElement [] = [
+  {title: 'Hydrogen', color: 1.0079, attachments: 'H',
+  }
+]
 
 @Component({
   selector: 'app-main',
@@ -12,47 +19,26 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 
 export class MainComponent {
 
-  public dataArr: DialogData [] = [];
+  constructor(public dialog: MatDialog) {}
+
   @Input() public title: string | undefined;
   @Input() public color: string | undefined;
   @Input() public attachments: any;
-  @Output() displayedColumns: string[] = ['title', 'color', 'attachments'];
-  @Output() dataToDisplay = [...this.dataArr];
-  @Output() dataSource = new ExampleDataSource(this.dataToDisplay);
+  @ViewChild(MatTable) table!: MatTable<TableElement>;
 
-  constructor(public dialog: MatDialog) {}
+  displayedColumns: string[] = ['title', 'color', 'attachments'];
+
+  dataSource = [...ELEMENT_DATA];
+
+  addData() {
+    const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
+    this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
+    this.table.renderRows();
+  }
 
   removeData() {
-    this.dataToDisplay = this.dataToDisplay.slice(0, -1);
-    this.dataSource.setData(this.dataToDisplay);
+    this.dataSource.pop();
+    this.table.renderRows();
   }
-
-  editData() {
-    const elementIndex = 1;
-    this.dataToDisplay = [...this.dataToDisplay, (this.dataArr)[elementIndex]];
-    this.dataSource.setData(this.dataToDisplay);
-  }
-}
-
-class ExampleDataSource extends DataSource<DialogData>  {
-  private _dataStream = new ReplaySubject<DialogData []>();
-
-  constructor(initialData: DialogData[]) {
-    super();
-    this.setData(initialData);
-  }
-
-  connect(): Observable<DialogData[]> {
-    return this._dataStream;
-  }
-
-  disconnect() {}
-
-  setData(data: DialogData[]) {
-    this._dataStream.next(data);
-  }
-
-
-
 
 }

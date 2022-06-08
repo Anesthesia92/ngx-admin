@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogData} from "../../models/board.model";
 import {ColorEvent} from "ngx-color";
@@ -16,27 +16,23 @@ export class DialogOverviewComponent {
   @Inject(MAT_DIALOG_DATA) public data: DialogData,
 ) {}
 
-   public onNoClick(): void {
+  @Output() primaryColor = '#5c359f';
+  @Input() public isDefaultColor = true;
+
+  public onNoClick(): void {
     this.dialogRef.close();
   }
 
-  handleChange($event: ColorEvent) {
-    console.log($event.color);
-    let color = {
-      hex: '#333',
-      rgb: {
-        r: 51,
-        g: 51,
-        b: 51,
-        a: 1,
-      },
-      hsl: {
-        h: 0,
-        s: 0,
-        l: .20,
-        a: 1,
-      },
+  public writeValue(val: string): void {
+    if (val !== this.primaryColor) {
+      this.primaryColor = val;
     }
   }
+
+  public handleChange($event: ColorEvent) {
+    this.primaryColor = $event.color.hex;
+    console.log($event.color)
+  }
+
 }
 
