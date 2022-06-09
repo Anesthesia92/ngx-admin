@@ -1,13 +1,10 @@
-import {Component, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MatTable} from "@angular/material/table";
-import {TableElement} from "../../models/board.model";
-
-const ELEMENT_DATA: TableElement [] = [
-  {title: 'Hydrogen', color: 1.0079, attachments: 'H', id: ''}
-]
+import {Board} from "../../models/board.model";
+import {BoardService} from "../../services/board-service.";
 
 @Component({
   selector: 'app-main',
@@ -17,26 +14,23 @@ const ELEMENT_DATA: TableElement [] = [
 
 export class MainComponent {
 
-  constructor(public dialog: MatDialog) {}
-
-  @Input() public title: string | undefined;
-  @Input() public color: string | undefined;
-  @Input() public attachments: any;
-  @ViewChild(MatTable) table!: MatTable<TableElement>;
-
+  commentInput = '';
+  @Input() item: any;
+  @Output() emitText: EventEmitter<{ title: string}> = new EventEmitter();
+  @ViewChild(MatTable) table!: MatTable<Board>;
   displayedColumns: string[] = ['title', 'color', 'attachments', 'buttons'];
 
-  dataSource = [...ELEMENT_DATA];
+  constructor(public dialog: MatDialog, public boardService: BoardService) {}
 
-  addData() {
-    const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-    this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
-    this.table.renderRows();
+  onAddBoard(title: string, color: string, attachments: any) {
+    if(title) {
+      this.boardService.addBoard(title, color, attachments)
+    }
   }
 
-  removeData() {
-    this.dataSource.pop();
-    this.table.renderRows();
+  onCommentTextEmit(title: string) {
+    this.emitText.emit({ title: this.commentInput });
+    this.commentInput = ''
   }
 
 }

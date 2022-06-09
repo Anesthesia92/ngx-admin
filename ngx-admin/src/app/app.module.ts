@@ -16,10 +16,10 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
-import {CkEditorComponent} from "./components/ck-editor/ck-editor.component";
 import {MatLineModule} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
 import { ColorSketchModule } from 'ngx-color/sketch';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -27,27 +27,27 @@ import { ColorSketchModule } from 'ngx-color/sketch';
     MainComponent,
     HeaderComponent,
     DialogOverviewComponent,
-    CkEditorComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
-    MatDialogModule,
-    MatTooltipModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    CKEditorModule,
-    MatLineModule,
-    MatListModule,
-    ColorSketchModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule,
+        MatDialogModule,
+        MatTooltipModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        CKEditorModule,
+        MatLineModule,
+        MatListModule,
+        ColorSketchModule,
+        MatSelectModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

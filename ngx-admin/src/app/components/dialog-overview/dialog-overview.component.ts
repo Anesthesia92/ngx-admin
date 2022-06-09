@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-
 import {ColorEvent} from "ngx-color";
 import {DialogData} from "../../models/dialog.model";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
+import {AbstractControl, FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-dialog-overview',
@@ -12,28 +14,35 @@ import {DialogData} from "../../models/dialog.model";
 
 export class DialogOverviewComponent {
 
+  @Output() emitColor: EventEmitter<string> = new EventEmitter();
+  // colorsData = Object.values(colors);
+  primaryColor: string | undefined
+
+  public form: any;
+  public notification = new FormControl('', Validators.required);
+  public Editor = ClassicEditor;
+
   constructor(
-  public dialogRef: MatDialogRef<DialogOverviewComponent>,
-  @Inject(MAT_DIALOG_DATA) public data: DialogData,
-) {}
+    public dialogRef: MatDialogRef<DialogOverviewComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {}
 
-  @Output() primaryColor = '#5c359f';
-  @Input() public isDefaultColor = true;
-
-  public onNoClick(): void {
+  public onChange({editor}: ChangeEvent) {
+    const title = editor.getData();
+    console.log(title);
+  }
+  public close(): void {
     this.dialogRef.close();
   }
 
-  public writeValue(val: string): void {
-    if (val !== this.primaryColor) {
-      this.primaryColor = val;
-    }
-  }
-
+  @Output()
   public handleChange($event: ColorEvent) {
     this.primaryColor = $event.color.hex;
-    console.log($event.color)
+    console.log($event.color.hex)
+    this.emitColor.emit(this.primaryColor);
   }
 
-}
+  submit() {
 
+  }
+}
