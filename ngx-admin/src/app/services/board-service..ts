@@ -1,47 +1,89 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {Board, Column} from "../models/board.model";
+import {Card, Column} from "../models/board.model";
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardService {
 
-  private initColumn = [
+  private initBoard = [
     {
-      id: '',
+      id: 1,
       title: 'To Do',
-      color: '',
-      attachments: ''
+      color: '#009886',
+      attachments: 'lol',
+      list: [
+        {
+          id: 1,
+          text: 'Example card item',
+        },
+      ]
     },
-
   ]
-  private column: Board[] = this.initColumn;
-  private column$ = new BehaviorSubject<Board[]>(this.initColumn);
+
+  private board: Column[] = this.initBoard
+  private board$ = new BehaviorSubject<Column[]>(this.initBoard)
 
   getBoard$() {
-    return this.column$.asObservable();
+    return this.board$.asObservable()
   }
 
-  changeColumnColor(color: string, boardId: any) {
-    this.column = this.column.map((board: Board) => {
-      if (board.id == boardId) {
-        board.color = color;
+  changeColumnColor(color: string, columnId: number) {
+    this.board = this.board.map((column: Column) => {
+      if (column.id === columnId) {
+        column.color = color;
       }
-      return board;
+      return column;
     });
-    this.column$.next([...this.column]);
+    this.board$.next([...this.board]);
   }
 
-  addBoard(title: string, color: string, attachments: any) {
-    const newBoard: Board = {
-      id: Date.now().toString(),
+  addColumn(title: string) {
+    const newColumn: Column = {
+      id: Date.now(),
       title: title,
       color: '#009886',
-      attachments: [],
+      list: [],
+      attachments: ''
     };
-    this.column = [...this.column, newBoard];
-    this.column$.next([...this.column]);
+
+    this.board = [...this.board, newColumn];
+    this.board$.next([...this.board]);
   }
+
+  addCard(text: string, columnId: number) {
+    const newCard: Card = {
+      id: Date.now(),
+      text,
+    };
+
+    this.board = this.board.map((column: Column) => {
+      if (column.id === columnId) {
+        column.list = [newCard, ...column.list];
+      }
+      return column;
+    });
+
+    this.board$.next([...this.board]);
+  }
+
+  deleteColumn(columnId: number) {
+    this.board = this.board.filter((column: Column) => column.id !== columnId);
+    this.board$.next([...this.board]);
+  }
+
+  deleteCard(cardId: number, columnId: number) {
+    this.board = this.board.map((column: Column) => {
+      if (column.id === columnId) {
+        column.list = column.list.filter((card: Card) => card.id !== cardId);
+      }
+      return column;
+    });
+
+    this.board$.next([...this.board]);
+  }
+
+
 
 }

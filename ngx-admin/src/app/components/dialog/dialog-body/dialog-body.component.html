@@ -1,0 +1,22 @@
+<div mat-dialog-content [ngStyle]="{'background-color': primaryColor}">
+  <mat-toolbar>
+    <mat-label>Add Title</mat-label>
+    <ckeditor [editor]="Editor" (change)="onChange($event)" class="text-editor"
+              [(ngModel)]="data.text"
+    ></ckeditor>
+  </mat-toolbar>
+  <mat-toolbar>
+    <mat-label>Color</mat-label>
+    <color-sketch (onChange)="handleChange($event)" class="color-picker" [(ngModel)]="data.color"></color-sketch>
+  </mat-toolbar>
+  <mat-toolbar>
+    <mat-label>Attachments</mat-label>
+    <input type="file" onchange="console.log(event.target.files)" [(ngModel)]="data.attachments" class="attachments">
+  </mat-toolbar>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="[data.text, data.attachments, data.color]" cdkFocusInitial color="primary">Confirm
+  </button>
+  <button mat-button (click)="close()">Cancel</button>
+</div>
+

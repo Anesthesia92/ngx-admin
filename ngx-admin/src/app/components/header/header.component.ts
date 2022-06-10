@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {DialogOverviewComponent} from "../dialog-overview/dialog-overview.component";
+import {DialogOverviewComponent} from "../dialog/dialog-overview.component";
+import {BoardService} from "../../services/board-service.";
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,19 +16,25 @@ export class HeaderComponent {
   @Input() public primaryColor: string | undefined;
   @Output() emitText: EventEmitter<any> = new EventEmitter()
 
-  public data = []
-
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public boardService: BoardService) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '700px',
-      data: {title: this.title, color: this.color, attachments: this.attachments},
+      data: {color: this.color},
     }
     );
+
     dialogRef.afterClosed().subscribe(result => {
-      this.emitText.emit(result);
+      this.color = result;
     });
   }
+
+  addColumn(event: string) {
+    if (event) {
+      this.boardService.addColumn(event)
+    }
+  }
+
 
 }

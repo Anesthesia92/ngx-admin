@@ -1,7 +1,11 @@
 <mat-toolbar>
   <div class="header-container">
     <div class="header-container__toolbar">
-      <button mat-raised-button color="accent" (click)="openDialog()">Create board</button>
+      <app-dialog (emitText)="addColumn($event)">
+        <button mat-raised-button color="primary">
+          New Column
+        </button>
+      </app-dialog>
     </div>
   </div>
 </mat-toolbar>

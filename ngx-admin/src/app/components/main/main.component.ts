@@ -3,8 +3,9 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MatTable} from "@angular/material/table";
-import {Board} from "../../models/board.model";
 import {BoardService} from "../../services/board-service.";
+import {Card, Column} from "../../models/board.model";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-main',
@@ -14,23 +15,54 @@ import {BoardService} from "../../services/board-service.";
 
 export class MainComponent {
 
-  commentInput = '';
-  @Input() item: any;
-  @Output() emitText: EventEmitter<{ title: string}> = new EventEmitter();
-  @ViewChild(MatTable) table!: MatTable<Board>;
-  displayedColumns: string[] = ['title', 'color', 'attachments', 'buttons'];
+  constructor(
+    public boardService: BoardService
+  ) { }
 
-  constructor(public dialog: MatDialog, public boardService: BoardService) {}
+  ngOnInit(): void {
+    console.log('BOARD - INIT')
+  }
 
-  onAddBoard(title: string, color: string, attachments: any) {
-    if(title) {
-      this.boardService.addBoard(title, color, attachments)
+  // tslint:disable-next-line:typedef
+  onColorChange(color: string, columnId: number) {
+    this.boardService.changeColumnColor(color, columnId);
+  }
+
+  onAddCard(text: string, columnId: number) {
+    if(text) {
+      this.boardService.addCard(text, columnId);
     }
   }
 
-  onCommentTextEmit(title: string) {
-    this.emitText.emit({ title: this.commentInput });
-    this.commentInput = ''
+  onDeleteColumn(columnId: number) {
+    this.boardService.deleteColumn(columnId);
   }
 
+  onDeleteCard(cardId: number, columnId: number) {
+    this.boardService.deleteCard(cardId, columnId);
+  }
+
+  // onChangeLike(event: {card: any, increase: boolean}, columnId: number ) {
+  //   const { card: { id }, increase } = event
+  //   this.boardService.changeLike(id, columnId, increase)
+  // }
+  //
+  // onAddComment(event: {id: number, text: string}, columnId: number) {
+  //   this.boardService.addComment(columnId, event.id, event.text)
+  // }
+  //
+  // onDeleteComment(comment, columnId, item) {
+  //   this.boardService.deleteComment(columnId, item.id, comment.id)
+  // }
+
+  drop(event: CdkDragDrop<Card[], any>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
+  }
 }

@@ -1,28 +1,57 @@
-<router-outlet></router-outlet>
-<div class="main-container">
-<table mat-table class="mat-elevation-z8 demo-table">
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef class="column" >title</th>
-    <td mat-cell *ngFor="let board of boardService.getBoard$() | async" >{{board.title}}</td>
-  </ng-container>
-  <ng-container matColumnDef="color">
-    <th mat-header-cell *matHeaderCellDef class="column">color</th>
-    <td mat-cell *matCellDef="let element; let i = index">{{element.color}}</td>
-  </ng-container>
-  <ng-container matColumnDef="attachments">
-    <th mat-header-cell *matHeaderCellDef  class="column">attachments</th>
-    <td mat-cell *matCellDef="let element">{{element.attachments}}</td>
-  </ng-container>
-  <ng-container matColumnDef="buttons" class="column">
-    <th mat-header-cell *matHeaderCellDef class="column">buttons</th>
-    <td mat-cell *matCellDef="let element"> <button mat-raised-button class="demo-button">Edit</button>
-      <button
-        mat-raised-button
-        class="demo-button">
-       Delete
-      </button></td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<!--<router-outlet></router-outlet>-->
+<!--<div class="main-container">-->
+<!--<table mat-table class="mat-elevation-z8 demo-table">-->
+<!--  <ng-container matColumnDef="title">-->
+<!--    <th mat-header-cell *matHeaderCellDef class="column" >title</th>-->
+<!--    <td mat-cell *ngFor="let board of boardService.getBoard$() | async" >{{board.title}}</td>-->
+<!--  </ng-container>-->
+<!--  <ng-container matColumnDef="color">-->
+<!--    <th mat-header-cell *matHeaderCellDef class="column">color</th>-->
+<!--    <td mat-cell *matCellDef="let element; let i = index">{{element.color}}</td>-->
+<!--  </ng-container>-->
+<!--  <ng-container matColumnDef="attachments">-->
+<!--    <th mat-header-cell *matHeaderCellDef  class="column">attachments</th>-->
+<!--    <td mat-cell *matCellDef="let element">{{element.attachments}}</td>-->
+<!--  </ng-container>-->
+<!--  <ng-container matColumnDef="buttons" class="column">-->
+<!--    <th mat-header-cell *matHeaderCellDef class="column">buttons</th>-->
+<!--    <td mat-cell *matCellDef="let element"> <button mat-raised-button class="demo-button">Edit</button>-->
+<!--      <button-->
+<!--        mat-raised-button-->
+<!--        class="demo-button">-->
+<!--       Delete-->
+<!--      </button></td>-->
+<!--  </ng-container>-->
+<!--  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--</table>-->
+<!--</div>-->
+<div class="container-fluid">
+  <div cdkDropListGroup class="row">
+    <div class="col-sm-6 col-lg-3 mb-3" *ngFor="let column of boardService.getBoard$() | async">
+
+      <!-- Column Title -->
+      <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
+        <h2 class="m-0">{{column.title}}</h2>
+        <h2 class="m-0">{{column.attachments}}</h2>
+        <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
+          <mat-icon style="font-size: 20px;">delete</mat-icon>
+        </button>
+      </div>
+       Add New Card To Column
+      <app-dialog (emitText)="onAddCard($event, column.id)">
+        <button mat-raised-button class="w-100 mb-1 btn-add">+</button>
+      </app-dialog>
+
+       Color Panel
+<!--      <app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel>-->
+
+      <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDrag class="example-box" [ngStyle]="{background: column.color}">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
