@@ -16,7 +16,8 @@ import {ColorEvent} from "ngx-color";
 
 export class MainComponent {
 
-  public primaryColor: any;
+ @Output() public primaryColor: any = new EventEmitter();
+
   public open: boolean | undefined;
 
   constructor(

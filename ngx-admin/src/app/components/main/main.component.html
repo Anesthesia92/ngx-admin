@@ -17,7 +17,7 @@
       </mat-toolbar>
       <mat-toolbar *ngIf="open" class="color-picker">
         <color-sketch (onChange)="handleChange($event)" class="color-picker__change"></color-sketch>
-        <button (click)=" onCloseColorPicker()">Ok</button>
+        <button mat-raised-button (click)="onCloseColorPicker()">Ok</button>
       </mat-toolbar>
       <mat-card cdkDropList [cdkDropListData]="column.list" class="cards" (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="cards-items" [ngStyle]="{background: primaryColor}" *ngFor="let item of column.list">
