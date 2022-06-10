@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "ngx-admin"
+  "defaultProject": "ngx-admin",
+  "cli": {
+    "analytics": false
+  }
 }

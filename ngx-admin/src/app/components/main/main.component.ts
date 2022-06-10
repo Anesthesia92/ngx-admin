@@ -6,6 +6,7 @@ import {MatTable} from "@angular/material/table";
 import {BoardService} from "../../services/board-service.";
 import {Card, Column} from "../../models/board.model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {ColorEvent} from "ngx-color";
 
 @Component({
   selector: 'app-main',
@@ -15,45 +16,43 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 
 export class MainComponent {
 
+  public primaryColor: any;
+  public open: boolean | undefined;
+
   constructor(
     public boardService: BoardService
   ) { }
 
-  ngOnInit(): void {
-    console.log('BOARD - INIT')
+  public handleChange($event: ColorEvent) {
+    this.primaryColor = $event.color.hex;
+    console.log($event.color.hex)
   }
 
-  // tslint:disable-next-line:typedef
   onColorChange(color: string, columnId: number) {
-    this.boardService.changeColumnColor(color, columnId);
+    this.boardService.changeColumnColor(color, columnId)
+  }
+
+  onOpenColorPicker() {
+    this.open = true
+  }
+
+  onCloseColorPicker() {
+    this.open = false
+  }
+
+  onDeleteColumn(columnId: number) {
+    this.boardService.deleteColumn(columnId)
+  }
+
+  onDeleteCard(cardId: number, columnId: number) {
+    this.boardService.deleteCard(cardId, columnId)
   }
 
   onAddCard(text: string, columnId: number) {
     if(text) {
-      this.boardService.addCard(text, columnId);
+      this.boardService.addCard(text, columnId)
     }
   }
-
-  onDeleteColumn(columnId: number) {
-    this.boardService.deleteColumn(columnId);
-  }
-
-  onDeleteCard(cardId: number, columnId: number) {
-    this.boardService.deleteCard(cardId, columnId);
-  }
-
-  // onChangeLike(event: {card: any, increase: boolean}, columnId: number ) {
-  //   const { card: { id }, increase } = event
-  //   this.boardService.changeLike(id, columnId, increase)
-  // }
-  //
-  // onAddComment(event: {id: number, text: string}, columnId: number) {
-  //   this.boardService.addComment(columnId, event.id, event.text)
-  // }
-  //
-  // onDeleteComment(comment, columnId, item) {
-  //   this.boardService.deleteComment(columnId, item.id, comment.id)
-  // }
 
   drop(event: CdkDragDrop<Card[], any>) {
     if (event.previousContainer === event.container) {

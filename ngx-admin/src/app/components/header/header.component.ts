@@ -18,23 +18,7 @@ export class HeaderComponent {
 
   constructor(public dialog: MatDialog, public boardService: BoardService) {}
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewComponent, {
-      width: '700px',
-      data: {color: this.color},
-    }
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.color = result;
-    });
-  }
-
   addColumn(event: string) {
-    if (event) {
-      this.boardService.addColumn(event)
-    }
+      this.boardService.addColumn(event);
   }
-
-
 }

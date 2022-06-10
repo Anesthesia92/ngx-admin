@@ -10,7 +10,8 @@ import {DialogBodyComponent} from "./dialog-body/dialog-body.component";
 
 export class DialogOverviewComponent {
 
-  @Output() emitText: EventEmitter<any> = new EventEmitter()
+  @Output() emitText: EventEmitter<any> = new EventEmitter();
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {

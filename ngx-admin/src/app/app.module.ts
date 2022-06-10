@@ -22,6 +22,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { DialogBodyComponent } from './components/dialog/dialog-body/dialog-body.component';
 import {HeaderComponent} from "./components/header/header.component";
 import {DialogOverviewComponent} from "./components/dialog/dialog-overview.component";
+import { MainItemComponent } from './components/main-item/main-item.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import {DialogOverviewComponent} from "./components/dialog/dialog-overview.compo
     MainComponent,
     HeaderComponent,
     DialogBodyComponent,
-    DialogOverviewComponent
+    DialogOverviewComponent,
+    MainItemComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import {DialogOverviewComponent} from "./components/dialog/dialog-overview.compo
     MatListModule,
     ColorSketchModule,
     MatSelectModule,
-    DragDropModule
+    DragDropModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

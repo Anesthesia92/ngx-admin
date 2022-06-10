@@ -12,21 +12,21 @@ export class BoardService {
       id: 1,
       title: 'To Do',
       color: '#009886',
-      attachments: 'lol',
       list: [
         {
           id: 1,
           text: 'Example card item',
+          like: 1,
         },
       ]
     },
-  ]
+  ];
 
-  private board: Column[] = this.initBoard
-  private board$ = new BehaviorSubject<Column[]>(this.initBoard)
+  private board: Column[] = this.initBoard;
+  private board$ = new BehaviorSubject<Column[]>(this.initBoard);
 
   getBoard$() {
-    return this.board$.asObservable()
+    return this.board$.asObservable();
   }
 
   changeColumnColor(color: string, columnId: number) {
@@ -45,7 +45,6 @@ export class BoardService {
       title: title,
       color: '#009886',
       list: [],
-      attachments: ''
     };
 
     this.board = [...this.board, newColumn];
@@ -83,7 +82,6 @@ export class BoardService {
 
     this.board$.next([...this.board]);
   }
-
 
 
 }

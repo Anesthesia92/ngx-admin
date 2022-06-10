@@ -11,10 +11,8 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class DialogBodyComponent {
 
-  @Output() emitColor: EventEmitter<string> = new EventEmitter();
-
+  @Output() emitText: EventEmitter<any> = new EventEmitter();
   public Editor = ClassicEditor;
-  public primaryColor: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogBodyComponent>,
@@ -30,9 +28,4 @@ export class DialogBodyComponent {
     this.dialogRef.close();
   }
 
-  public handleChange($event: ColorEvent) {
-    this.primaryColor = $event.color.hex;
-    console.log($event.color.hex)
-    this.emitColor.emit(this.primaryColor);
-  }
 }
