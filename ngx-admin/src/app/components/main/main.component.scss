@@ -36,9 +36,14 @@
   position: absolute;
   z-index: 1000;
   display: flex;
+  max-width: 1020px;
+  background-color: white;
   flex-direction: column;
+  height: 0;
   &__change {
     max-width: 150px;
     z-index: 1000;
+    cursor: pointer;
+    margin-right: 25%;
   }
 }

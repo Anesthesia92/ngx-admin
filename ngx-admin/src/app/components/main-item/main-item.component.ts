@@ -7,17 +7,13 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class MainItemComponent {
 
-  @Input() public primaryColor: string | undefined;
-
-
+  @Input() primaryColor: string | undefined;
   @Input() item: any;
   @Output() emitText: EventEmitter<{ id: number; text: string, color: string, attachments: any }> = new EventEmitter();
   @Output() emitCardItem: EventEmitter<{ card: any; increase: boolean }> = new EventEmitter();
   @Output() emitDeleteCard: EventEmitter<number> = new EventEmitter();
 
-
   constructor() { }
-
 
   onCardItemEmit(card: any, increase: boolean) {
     this.emitCardItem.emit({ card, increase });

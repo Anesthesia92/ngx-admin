@@ -1,31 +1,38 @@
 <div class="main-container">
-    <div class="main-container__table" *ngFor="let column of boardService.getBoard$() | async">
-        <mat-toolbar class="title">
-          <h1>{{column.title}}</h1>
-        <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
-          <mat-icon style="font-size: 20px;">delete</mat-icon>
-        </button>
-        </mat-toolbar>
-      <app-dialog (emitText)="onAddCard($event, column.id)">
-        <button mat-raised-button class="btn-add" (click)="onOpenColorPicker()">+</button>
-      </app-dialog>
-      <mat-toolbar class="table-wrapper">
-       <div class="column"> Title </div>
-        <div class="column"> Color </div>
-        <div class="column"> Attachments </div>
-        <div class="column"> Buttons </div>
-      </mat-toolbar>
-      <mat-toolbar *ngIf="open" class="color-picker">
-        <color-sketch (onChange)="handleChange($event)" class="color-picker__change"></color-sketch>
+  <div class="main-container__table" *ngFor="let column of boardService.getBoard$() | async">
+    <mat-toolbar class="title">
+      <h1>{{column.title}}</h1>
+      <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
+        <mat-icon style="font-size: 20px;">delete</mat-icon>
+      </button>
+    </mat-toolbar>
+    <app-dialog (emitText)="onAddCard($event, column.id)">
+      <button mat-raised-button class="btn-add" (click)="onOpenColorPicker()">+</button>
+    </app-dialog>
+    <mat-toolbar class="table-wrapper">
+      <div class="column"> Title </div>
+      <div class="column"> Color </div>
+      <div class="column"> Attachments </div>
+      <div class="column"> Buttons</div>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="open" class="color-picker">
+      <div class="color-picker__change" cdkDragBoundary=".color-picker" cdkDrag>
+        <color-sketch (onChange)="handleChange($event)">
+        </color-sketch>
         <button mat-raised-button (click)="onCloseColorPicker()">Ok</button>
-      </mat-toolbar>
-      <mat-card cdkDropList [cdkDropListData]="column.list" class="cards" (cdkDropListDropped)="drop($event)">
-        <div cdkDrag class="cards-items" [ngStyle]="{background: primaryColor}" *ngFor="let item of column.list">
-          <app-main-item
-            [item]="item"
-            (emitDeleteCard)="onDeleteCard($event, column.id)">
-          </app-main-item>
-        </div>
-      </mat-card>
-    </div>
+      </div>
+    </mat-toolbar>
+    <ng-template>
+      <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+      </div>
+    </ng-template>
+    <mat-card cdkDropList [cdkDropListData]="column.list" class="cards" (cdkDropListDropped)="drop($event)">
+      <div cdkDrag class="cards-items" [ngStyle]="{background: primaryColor}" *ngFor="let item of column.list">
+        <app-main-item
+          [item]="item" [primaryColor] = (primaryColor)
+          (emitDeleteCard)="onDeleteCard($event, column.id)">
+        </app-main-item>
+      </div>
+    </mat-card>
   </div>
+</div>

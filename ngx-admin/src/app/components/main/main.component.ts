@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -7,6 +7,8 @@ import {BoardService} from "../../services/board-service.";
 import {Card, Column} from "../../models/board.model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {ColorEvent} from "ngx-color";
+import {TemplatePortal} from "@angular/cdk/portal";
+import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-main',
@@ -16,7 +18,7 @@ import {ColorEvent} from "ngx-color";
 
 export class MainComponent {
 
- @Output() public primaryColor: any = new EventEmitter();
+  @Output() primaryColor: any = new EventEmitter<any>();
 
   public open: boolean | undefined;
 
@@ -28,16 +30,20 @@ export class MainComponent {
     this.primaryColor = $event.color.hex;
     console.log($event.color.hex)
   }
+  //
+  // onColorChange(color: string, columnId: number) {
+  //   this.boardService.changeColumnColor(color, columnId)
+  // }
 
-  onColorChange(color: string, columnId: number) {
-    this.boardService.changeColumnColor(color, columnId)
+  onAcceptBtnClick() {
+    this.primaryColor.emit(this.primaryColor);
   }
 
-  onOpenColorPicker() {
+  public onOpenColorPicker() {
     this.open = true
   }
 
-  onCloseColorPicker() {
+  public onCloseColorPicker() {
     this.open = false
   }
 

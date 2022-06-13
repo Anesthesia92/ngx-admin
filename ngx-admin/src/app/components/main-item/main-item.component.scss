@@ -1,6 +1,7 @@
 .items-container {
   display: flex;
   justify-content: space-around;
+  cursor: pointer;
   .item {
     width: 25%;
     display: flex;
