@@ -10,10 +10,6 @@ import {BoardService} from "../../services/board-service.";
 })
 export class HeaderComponent {
 
-  @Output() public title: string | undefined;
-  @Output() public color: string | undefined;
-  @Output() public attachments: any;
-  @Input() public primaryColor: string | undefined;
   @Output() emitText: EventEmitter<any> = new EventEmitter()
 
   constructor(public dialog: MatDialog, public boardService: BoardService) {}

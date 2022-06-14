@@ -1,14 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild} from '@angular/core';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable, ReplaySubject} from 'rxjs';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MatTable} from "@angular/material/table";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BoardService} from "../../services/board-service.";
-import {Card, Column} from "../../models/board.model";
+import {Card} from "../../models/board.model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {ColorEvent} from "ngx-color";
-import {TemplatePortal} from "@angular/cdk/portal";
-import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-main',
@@ -18,47 +12,38 @@ import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 
 export class MainComponent {
 
-  @Output() primaryColor: any = new EventEmitter<any>();
-
   public open: boolean | undefined;
 
-  constructor(
-    public boardService: BoardService
-  ) { }
+  @Output() color: any = new EventEmitter<any>();
+
+  constructor(public boardService: BoardService) { }
 
   public handleChange($event: ColorEvent) {
-    this.primaryColor = $event.color.hex;
+    this.color = $event.color.hex;
     console.log($event.color.hex)
-  }
-  //
-  // onColorChange(color: string, columnId: number) {
-  //   this.boardService.changeColumnColor(color, columnId)
-  // }
-
-  onAcceptBtnClick() {
-    this.primaryColor.emit(this.primaryColor);
   }
 
   public onOpenColorPicker() {
-    this.open = true
-  }
-
-  public onCloseColorPicker() {
-    this.open = false
+    this.open = true;
   }
 
   onDeleteColumn(columnId: number) {
-    this.boardService.deleteColumn(columnId)
+    this.boardService.deleteColumn(columnId);
   }
 
   onDeleteCard(cardId: number, columnId: number) {
-    this.boardService.deleteCard(cardId, columnId)
+    this.boardService.deleteCard(cardId, columnId);
   }
 
   onAddCard(text: string, columnId: number) {
-    if(text) {
-      this.boardService.addCard(text, columnId)
+    if (text) {
+      this.boardService.addCard(text, columnId);
     }
+    this.onOpenColorPicker();
+  }
+
+  onAddComment(event: {id: number, text: string}, columnId: number) {
+    this.boardService.addComment(columnId, event.id, event.text);
   }
 
   drop(event: CdkDragDrop<Card[], any>) {
@@ -71,4 +56,8 @@ export class MainComponent {
         event.currentIndex);
     }
   }
+  onCloseColorPicker() {
+    this.open = false;
+  }
+
 }

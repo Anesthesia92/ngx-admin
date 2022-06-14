@@ -28,5 +28,9 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
+  },
+    "CKEDITOR.config.autoParagraph": false,
+  "CKEDITOR.editorConfig": {
+    "config.enterMode": "CKEDITOR.ENTER_BR"
   }
 }

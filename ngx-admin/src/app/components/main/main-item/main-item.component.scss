@@ -10,3 +10,13 @@
     border-right: 1px solid black;
   }
 }
+.mat-expansion-panel {
+  width: 237px;
+  background-color: rgb(255, 254, 254, 0.5);
+  position: relative;
+}
+
+input {
+  display: flex;
+  flex-direction: column;
+}

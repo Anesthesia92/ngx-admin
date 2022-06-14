@@ -1,0 +1,36 @@
+<div class="items-container">
+  <div class="item">{{ item.text }}</div>
+  <div class="item">{{ item.color || color}}</div>
+  <div class="item">
+    <button mat-icon-button>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Files
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <input [(ngModel)]="commentInput" type="file" onchange="console.log(event.target.files)"  id="file-input">
+        <button
+          mat-button
+          *ngIf="commentInput"
+          matSuffix
+          mat-icon-button
+          color="primary"
+          class="icon-confirm"
+          (click)="onCommentTextEmit(item.id)">
+          <mat-icon>done</mat-icon>
+        </button>
+        {{commentInput}}
+        <div *ngFor="let commentInput of item.comments">
+          <app-files-item [commentInput]="commentInput" (click)="onDeleteComment(column.id, item, commentInput)"></app-files-item>
+        </div>
+      </mat-expansion-panel>
+    </button>
+  </div>
+  <div class="item">
+    <button mat-icon-button class="icon-delete" (click)="onCardDelete(item.id)">
+    <mat-icon style="font-size: 18px;">delete</mat-icon>
+  </button>
+  </div>
+</div>
+

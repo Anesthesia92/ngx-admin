@@ -19,7 +19,7 @@ export class DialogOverviewComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogBodyComponent, {
-      width: '700px',
+      width: '750px',
       data: {}
     });
 

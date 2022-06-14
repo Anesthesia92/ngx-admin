@@ -1,5 +1,5 @@
-
 export interface Card {
+  comments: Comment[];
   id: number;
   text: string;
 }
@@ -7,6 +7,11 @@ export interface Card {
 export interface Column {
   id: number;
   title: string;
-  color: string;
   list: Card[];
+  color: string;
+}
+
+export interface Comment {
+  id: number;
+  text: string;
 }

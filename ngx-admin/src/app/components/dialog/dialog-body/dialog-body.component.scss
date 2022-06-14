@@ -1,5 +1,6 @@
-mat-dialog-content {
-  height: 600px;
+.dialog-content {
+  overflow: hidden;
+  height: 100%;
 }
 
 mat-toolbar {
@@ -11,7 +12,7 @@ mat-toolbar {
 }
 
 .text-editor {
-  width: 550px;
+  width: 620px;
 }
 
 .color-picker {

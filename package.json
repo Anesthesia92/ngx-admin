@@ -1,9 +1,14 @@
 {
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^34.1.0",
+    "@ckeditor/ckeditor5-clipboard": "^34.1.0",
+    "@ckeditor/ckeditor5-table": "^34.1.0",
     "@ngrx/effects": "^13.2.0",
     "@ngrx/store": "^13.2.0",
     "@ngrx/store-devtools": "^13.2.0",
     "angular-bootstrap-colorpicker": "^3.0.32"
+  },
+  "devDependencies": {
+    "@ckeditor/ckeditor5-alignment": "^34.1.0"
   }
 }

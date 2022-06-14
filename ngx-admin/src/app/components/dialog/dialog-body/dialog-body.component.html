@@ -1,4 +1,4 @@
-<div mat-dialog-content>
+<div mat-dialog-content class="dialog-content">
   <mat-toolbar>
     <mat-label>Add Title</mat-label>
     <ckeditor [editor]="Editor" (change)="onChange($event)" class="text-editor"
@@ -6,8 +6,7 @@
     ></ckeditor>
   </mat-toolbar>
 <div mat-dialog-actions>
-  <button mat-raised-button [mat-dialog-close]="[data.text]" cdkFocusInitial color="primary">Confirm
-  </button>
+  <button mat-raised-button [mat-dialog-close]="[data.text]" cdkFocusInitial color="primary">Confirm</button>
   <button mat-button (click)="close()">Cancel</button>
 </div>
 </div>

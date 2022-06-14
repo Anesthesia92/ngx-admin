@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
-import {ColorEvent} from "ngx-color";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {FontBackgroundColor, FontColor, FontFamily} from "@ckeditor/ckeditor5-font";
+import {ColorEvent} from "ngx-color";
 
 @Component({
   selector: 'app-dialog-body',
@@ -12,6 +13,9 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class DialogBodyComponent {
 
   @Output() emitText: EventEmitter<any> = new EventEmitter();
+
+  @Output() color: any = new EventEmitter();
+
   public Editor = ClassicEditor;
 
   constructor(
@@ -26,6 +30,11 @@ export class DialogBodyComponent {
 
   public close(): void {
     this.dialogRef.close();
+  }
+
+  public handleChange($event: ColorEvent) {
+    this.color = $event.color.hex;
+    console.log($event.color.hex)
   }
 
 }

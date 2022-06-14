@@ -1,3 +1,4 @@
+
 <div class="main-container">
   <div class="main-container__table" *ngFor="let column of boardService.getBoard$() | async">
     <mat-toolbar class="title">
@@ -7,7 +8,7 @@
       </button>
     </mat-toolbar>
     <app-dialog (emitText)="onAddCard($event, column.id)">
-      <button mat-raised-button class="btn-add" (click)="onOpenColorPicker()">+</button>
+      <button mat-raised-button class="btn-add">Add card</button>
     </app-dialog>
     <mat-toolbar class="table-wrapper">
       <div class="column"> Title </div>
@@ -27,10 +28,12 @@
       </div>
     </ng-template>
     <mat-card cdkDropList [cdkDropListData]="column.list" class="cards" (cdkDropListDropped)="drop($event)">
-      <div cdkDrag class="cards-items" [ngStyle]="{background: primaryColor}" *ngFor="let item of column.list">
+      <div cdkDrag class="cards-items" [ngStyle]="{background: color}" *ngFor="let item of column.list">
         <app-main-item
-          [item]="item" [primaryColor] = (primaryColor)
-          (emitDeleteCard)="onDeleteCard($event, column.id)">
+          [item]="item"
+          [color] = (color)
+          (emitDeleteCard)="onDeleteCard($event, column.id)"
+        [column]="column">
         </app-main-item>
       </div>
     </mat-card>
