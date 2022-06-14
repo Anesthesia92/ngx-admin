@@ -16,7 +16,8 @@ export class MainComponent {
 
   @Output() color: any = new EventEmitter<any>();
 
-  constructor(public boardService: BoardService) { }
+  constructor(public boardService: BoardService) {
+  }
 
   public handleChange($event: ColorEvent) {
     this.color = $event.color.hex;
@@ -42,7 +43,7 @@ export class MainComponent {
     this.onOpenColorPicker();
   }
 
-  onAddComment(event: {id: number, text: string}, columnId: number) {
+  onAddComment(event: { id: number, text: string }, columnId: number) {
     this.boardService.addComment(columnId, event.id, event.text);
   }
 
@@ -56,6 +57,7 @@ export class MainComponent {
         event.currentIndex);
     }
   }
+
   onCloseColorPicker() {
     this.open = false;
   }

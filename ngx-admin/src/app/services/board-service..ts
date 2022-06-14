@@ -20,7 +20,7 @@ export class BoardService {
           comments: [
             {
               id: 1,
-              text: 'Some comment'
+              text: 'Some attachment'
             }
           ]
         },

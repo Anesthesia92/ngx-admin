@@ -19,13 +19,13 @@ import {MatListModule} from "@angular/material/list";
 import {ColorSketchModule} from 'ngx-color/sketch';
 import {MatSelectModule} from "@angular/material/select";
 import {DragDropModule} from "@angular/cdk/drag-drop";
-import { DialogBodyComponent } from './components/dialog/dialog-body/dialog-body.component';
+import {DialogBodyComponent} from './components/dialog/dialog-body/dialog-body.component';
 import {HeaderComponent} from "./components/header/header.component";
 import {DialogOverviewComponent} from "./components/dialog/dialog-overview.component";
-import { MainItemComponent } from './components/main/main-item/main-item.component';
+import {MainItemComponent} from './components/main/main-item/main-item.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {FilesItemComponent } from './components/files-item/files-item.component';
+import {FilesItemComponent} from './components/files-item/files-item.component';
 
 @NgModule({
   declarations: [
@@ -37,29 +37,29 @@ import {FilesItemComponent } from './components/files-item/files-item.component'
     MainItemComponent,
     FilesItemComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatTableModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatInputModule,
-        MatDialogModule,
-        MatTooltipModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        CKEditorModule,
-        MatLineModule,
-        MatListModule,
-        ColorSketchModule,
-        MatSelectModule,
-        DragDropModule,
-        MatCardModule,
-        MatExpansionModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    CKEditorModule,
+    MatLineModule,
+    MatListModule,
+    ColorSketchModule,
+    MatSelectModule,
+    DragDropModule,
+    MatCardModule,
+    MatExpansionModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

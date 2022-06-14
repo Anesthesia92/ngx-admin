@@ -7,13 +7,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class FilesItemComponent {
 
-  @Input() commentInput: any;
   @Input() comment: any;
   @Output() emitComment: EventEmitter<any> = new EventEmitter();
 
-  onCommentEmit(commentInput: Comment) {
-    this.emitComment.emit(commentInput);
-    console.log(commentInput)
+  onCommentEmit(comment: Comment) {
+    this.emitComment.emit(comment);
+    console.log(this.comment)
   }
 
 }

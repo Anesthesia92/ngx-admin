@@ -13,22 +13,28 @@ export class MainItemComponent {
   @Input() column: any;
   @Output() emitText: EventEmitter<{ id: number; text: string }> = new EventEmitter();
   @Output() emitDeleteCard: EventEmitter<number> = new EventEmitter();
-  @Output() commentInput: EventEmitter<string> | any= new EventEmitter();
 
+  commentInput = '';
   panelOpenState = false;
 
-  constructor(public boardService: BoardService) { }
+  constructor(public boardService: BoardService) {
+  }
 
   onCardDelete(id: number) {
     this.emitDeleteCard.emit(id)
   }
 
   onCommentTextEmit(id: number) {
-    this.emitText.emit({ id, text: this.commentInput });
+    this.emitText.emit({id, text: this.commentInput});
+    this.commentInput = '';
     console.log(this.commentInput)
   }
 
-  onDeleteComment(columnId: number, item: { id: number }, comment: {id: number }) {
+  onAddComment(event: {id: number, text: string}, columnId: number) {
+    this.boardService.addComment(columnId, event.id, event.text)
+  }
+
+  onDeleteComment(columnId: number, item: { id: number }, comment: { id: number }) {
     this.boardService.deleteComment(columnId, item.id, comment.id)
   }
 }

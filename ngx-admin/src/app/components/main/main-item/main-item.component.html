@@ -9,7 +9,8 @@
             Files
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <input [(ngModel)]="commentInput" type="file" onchange="console.log(event.target.files)"  id="file-input">
+        <input [(ngModel)]="commentInput" type="file" onchange="console.log(event.target.files)"
+               class="custom-file-input">
         <button
           mat-button
           *ngIf="commentInput"
@@ -21,8 +22,8 @@
           <mat-icon>done</mat-icon>
         </button>
         {{commentInput}}
-        <div *ngFor="let commentInput of item.comments">
-          <app-files-item [commentInput]="commentInput" (click)="onDeleteComment(column.id, item, commentInput)"></app-files-item>
+        <div *ngFor="let comment of item.comments">
+          <app-files-item [comment]="comment" (click)="onDeleteComment(column.id, item, comment)"></app-files-item>
         </div>
       </mat-expansion-panel>
     </button>
